@@ -39,44 +39,13 @@ def sendMessage(to, text, contentMetadata={}, contentType=0):
 
 def NOTIFIED_ADD_CONTACT(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param1).displayName + "謝謝加入~~ Thanks for add")
+        sendMessage(op.param1, client.getContact(op.param1).displayName + "謝謝加入~~")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_ADD_CONTACT\n\n")
         return
 
 tracer.addOpInterrupt(5,NOTIFIED_ADD_CONTACT)
-
-def NOTIFIED_ACCEPT_GROUP_INVITATION(op):
-    
-    try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + "歡迎來到 " + group.name)
-    except Exception as e:
-        print e
-        print ("\n\nNOTIFIED_ACCEPT_GROUP_INVITATION\n\n")
-        return
-
-tracer.addOpInterrupt(17,NOTIFIED_ACCEPT_GROUP_INVITATION)
-
-def NOTIFIED_KICKOUT_FROM_GROUP(op):
-    try:
-        sendMessage(op.param1, client.getContact(op.param3).displayName + " 被踢了呢><!\n" + "[戰神" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
-    except Exception as e:
-        print e
-        print ("\n\nNOTIFIED_KICKOUT_FROM_GROUP\n\n")
-        return
-
-tracer.addOpInterrupt(19,NOTIFIED_KICKOUT_FROM_GROUP)
-
-def NOTIFIED_LEAVE_GROUP(op):
-    try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + " 已退出群組\n" + "[戰神" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
-    except Exception as e:
-        print e
-        print ("\n\nNOTIFIED_LEAVE_GROUP\n\n")
-        return
-
-tracer.addOpInterrupt(15,NOTIFIED_LEAVE_GROUP)
 
 def NOTIFIED_READ_MESSAGE(op):
     #print op
@@ -141,12 +110,15 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to, msg.to)
                 if msg.text == "ginfo":
                     group = client.getGroup(msg.to)
-                    md = "戰神抓群組資料\n\n" + "[群組名稱]\n" + group.name + "\n\n[gid]\n" + group.id + "\n\n[群組照片]\nhttp://dl.profile.line-cdn.net/" + group.pictureStatus
-                    if group.preventJoinByTicket is False: md += "\n\n群組URL: 開啟中\n"
+                    md = "戰神-群組詳情\n[" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]\n\n[群組名稱]\n" + group.name + "\n\n[群組gid]\n" + group.id + "\n\n[群組照片]\nhttp://dl.profile.line-cdn.net/" + group.pictureStatus
+                    if group.preventJoinByTicket is False: md += "\n\n群組URL: 許可中\n"
                     else: md += "\n\n群組URL: 關閉中\n"
-                    if group.invitee is None: md += "\n成員人數: " + str(len(group.members)) + "人\n\n招待中: 0人"
-                    else: md += "\n成員人數: " + str(len(group.members)) + "人\n招待中: " + str(len(group.invitee)) + "人\n\n" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]"
-                    sendMessage(msg.to,md)
+                    if group.invitee is None: md += "\n成員人數: " + str(len(group.members)) + "人\n\n招待中人數: 0人"
+                    else: md += "\n成員人數: " + str(len(group.members)) + "人\n招待中人數: " + str(len(group.invitee)) + "人"
+			sendMessage(msg.to,md)
+		if msg.text == "help":
+                    sendMessage(msg.to,"ㄌㄑandㄎㄩ專屬help\n\n[mid] 查看自己的mid\n" + "[gid] 查看群組gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[kick:] 利用mid踢人\n" + 
+				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[invite:] 利用mid邀請\n[show:] 顯示mid得友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n\n[" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
                 if "gname:" in msg.text:
                     key = msg.text[22:]
                     group = client.getGroup(msg.to)
