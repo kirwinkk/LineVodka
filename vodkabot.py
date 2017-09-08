@@ -135,10 +135,7 @@ def SEND_MESSAGE(op):
         else:
             pass
 
-    except Exception as e:
-        print e
-        print ("\n\nSEND_MESSAGE\n\n")
-        return
+   
 
 tracer.addOpInterrupt(25,SEND_MESSAGE)
 
