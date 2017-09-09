@@ -118,7 +118,7 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to,md)
 		if msg.text == "help":
                     sendMessage(msg.to,"ㄌㄑandㄎㄩ專屬help\n\n[mid] 查看自己的mid\n" + "[gid] 查看群組gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[kick:] 利用mid踢人\n" + 
-				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[invite:] 利用mid邀請\n[show:] 顯示mid得友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n\n[" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
+				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[invite:] 利用mid邀請\n[show:] 顯示mid得友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n\n[" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
                 if "gname:" in msg.text:
                     key = msg.text[22:]
                     group = client.getGroup(msg.to)
@@ -135,6 +135,20 @@ def SEND_MESSAGE(op):
                         group.preventJoinByTicket = False
                         client.updateGroup(group)
                         sendMessage(msg.to, "URL 已開啟")
+		if msg.text == "bot":
+                    group = client.getGroup(msg.to)
+		    if group.preventJoinByTicket == False:
+                        sendMessage(msg.to, "保護bot追加!!")
+                    else:
+                        group.preventJoinByTicket = False
+                        client.updateGroup(group)
+                        sendMessage(msg.to, "保護bot追加!!")
+                    if group.preventJoinByTicket == True:
+                        sendMessage(msg.to, "bot追加完畢!!")
+                    else:
+                        group.preventJoinByTicket = True
+                        client.updateGroup(group)
+                        sendMessage(msg.to, "bot追加完畢!!")
                 if msg.text == "urloff":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == True:
