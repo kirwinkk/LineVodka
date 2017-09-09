@@ -138,6 +138,7 @@ def SEND_MESSAGE(op):
 		if msg.text == "bot":
                     group = client.getGroup(msg.to)
 		    if group.preventJoinByTicket == False:
+			sendMessage(msg.to, "")
                     else:
                         group.preventJoinByTicket = False
                         client.updateGroup(group)
