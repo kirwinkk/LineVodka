@@ -109,17 +109,17 @@ def SEND_MESSAGE(op):
 		if msg.text == "Mid":
                     sendMessage(msg.to, msg.from_)
 		if msg.text == "作者":
-                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0")
+                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "Author":
-                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0")
+                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "作成者":
-                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0")
+                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "author":
-                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0")
+                    sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "Ps":
-                    sendMessage(msg.to,"戦神実験版-注意事項\n\n1. 禁止在副本or私訊發出指令\n2.打完指令若沒反應,請耐心等待,禁止不斷輸入指令\n3.10人以下群組會造成機器不穩定\n4.當伺服器不穩,機器也會不穩,請見諒\n\n仍有疑問歡迎詢問作者\n戦神:http://line.me/ti/p/4-ZKcjagH0")
+                    sendMessage(msg.to,"戦神実験版-注意事項\n\n1. 禁止在副本or私訊發出指令\n2.打完指令若沒反應,請耐心等待,禁止不斷輸入指令\n3.10人以下群組會造成機器不穩定\n4.當伺服器不穩,機器也會不穩,請見諒\n\n仍有疑問歡迎詢問作者\n戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "ps":
-                    sendMessage(msg.to,"戦神実験版-注意事項\n\n1. 禁止在副本or私訊發出指令\n2.打完指令若沒反應,請耐心等待,禁止不斷輸入指令\n3.10人以下群組會造成機器不穩定\n4.當伺服器不穩,機器也會不穩,請見諒\n\n仍有疑問歡迎詢問作者\n戦神:http://line.me/ti/p/4-ZKcjagH0")
+                    sendMessage(msg.to,"戦神実験版-注意事項\n\n1. 禁止在副本or私訊發出指令\n2.打完指令若沒反應,請耐心等待,禁止不斷輸入指令\n3.10人以下群組會造成機器不穩定\n4.當伺服器不穩,機器也會不穩,請見諒\n\n仍有疑問歡迎詢問作者\n戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "gid":
                     sendMessage(msg.to, msg.to)
 		if msg.text == "Gid":
