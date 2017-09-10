@@ -248,6 +248,17 @@ def SEND_MESSAGE(op):
                         client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
                         contact = client.getContact(Mids[kazu])
                         sendMessage(msg.to, ""+contact.displayName+" 抱歉囉><")
+		if "mid:" in msg.text:
+                    key = msg.text[3:]
+                    group = client.getGroup(msg.to)
+                    Names = [contact.displayName for contact in group.members]
+                    Mids = [contact.mid for contact in group.members]
+                    if key in Names:
+                        kazu = Names.index(key)
+			contact = client.getContact(Mids[kazu])
+                        sendMessage(msg.to,contact.displayName + "\n" + contact.mid + "\n\n" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                        client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
+                        contact = client.getContact(Mids[kazu])
                     else:
                         sendMessage(msg.to, "戦神找不到這位成員><\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "cancel":
