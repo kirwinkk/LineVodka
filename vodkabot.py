@@ -47,37 +47,6 @@ def NOTIFIED_ADD_CONTACT(op):
 
 tracer.addOpInterrupt(5,NOTIFIED_ADD_CONTACT)
 
-def NOTIFIED_ACCEPT_GROUP_INVITATION(op):
-    
-    try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + "歡迎來到 " + group.name)
-    except Exception as e:
-        print e
-        print ("\n\nNOTIFIED_ACCEPT_GROUP_INVITATION\n\n")
-        return
-
-tracer.addOpInterrupt(17,NOTIFIED_ACCEPT_GROUP_INVITATION)
-
-def NOTIFIED_KICKOUT_FROM_GROUP(op):
-    try:
-        sendMessage(op.param1, client.getContact(op.param3).displayName + "  已被踢出群組!\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-    except Exception as e:
-        print e
-        print ("\n\nNOTIFIED_KICKOUT_FROM_GROUP\n\n")
-        return
-
-tracer.addOpInterrupt(19,NOTIFIED_KICKOUT_FROM_GROUP)
-
-def NOTIFIED_LEAVE_GROUP(op):
-    try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + "  已退出群組\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-    except Exception as e:
-        print e
-        print ("\n\nNOTIFIED_LEAVE_GROUP\n\n")
-        return
-
-tracer.addOpInterrupt(15,NOTIFIED_LEAVE_GROUP)
-
 def NOTIFIED_READ_MESSAGE(op):
     #print op
     try:
@@ -137,6 +106,8 @@ def SEND_MESSAGE(op):
             if msg.contentType == 0:
                 if msg.text == "mid":
                     sendMessage(msg.to, msg.from_)
+		if sendcontact :
+		    sendMessage(msg.to, msg.from_)
 		if msg.text == "Mid":
                     sendMessage(msg.to, msg.from_)
                 if msg.text == "gid":
@@ -248,19 +219,6 @@ def SEND_MESSAGE(op):
                         client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
                         contact = client.getContact(Mids[kazu])
                         sendMessage(msg.to, ""+contact.displayName+" 抱歉囉><")
-		if "mid:" in msg.text:
-                    key = msg.text[3:]
-                    group = client.getGroup(msg.to)
-                    Names = [contact.displayName for contact in group.members]
-                    Mids = [contact.mid for contact in group.members]
-                    if key in Names:
-                        kazu = Names.index(key)
-			contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to,contact.displayName + "\n" + contact.mid + "\n\n" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                        client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
-                        contact = client.getContact(Mids[kazu])
-                    else:
-                        sendMessage(msg.to, "戦神找不到這位成員><\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "cancel":
                     group = client.getGroup(msg.to)
                     if group.invitee is None:
