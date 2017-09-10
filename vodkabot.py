@@ -106,8 +106,6 @@ def SEND_MESSAGE(op):
             if msg.contentType == 0:
                 if msg.text == "mid":
                     sendMessage(msg.to, msg.from_)
-		if sendcontact :
-		    sendMessage(msg.to, msg.from_)
 		if msg.text == "Mid":
                     sendMessage(msg.to, msg.from_)
                 if msg.text == "gid":
@@ -119,9 +117,9 @@ def SEND_MESSAGE(op):
 		if msg.text == "Kicker":
                     sendMessage(msg.to,"Error")
 		if msg.text == "Ver":
-                    sendMessage(msg.to,"戦神実験版\n\n[版本version]\n実験版ver.3.5.4\n\n[版本詳情]\n実験版\n 3.1.0\n   基本指令\n 3.2.0\n   增加邀請系統\n 3.3.0\n   修改細部回覆內容\n 3.4.0\n   增加Nk功效\n   增加bot指令\n 3.5.0\n   增加kicker指令\n   增加help指令\n   增加指令下達時間顯示\n   指令支援大小寫\n   增加隱藏指令")
+                    sendMessage(msg.to,"戦神実験版\n\n[版本version]\n実験版ver.5.1.1\n\n[版本詳情]\n実験版\n 5.1.0\n   刪除偵測退群回覆\n   刪除偵測被踢回覆\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "ver":
-                    sendMessage(msg.to,"戦神実験版\n\n[版本version]\n実験版ver.3.5.4\n\n[版本詳情]\n実験版\n 3.1.0\n   基本指令\n 3.2.0\n   增加邀請系統\n 3.3.0\n   修改細部回覆內容\n 3.4.0\n   增加Nk功效\n   增加bot指令\n 3.5.0\n   增加kicker指令\n   增加help指令\n   增加指令下達時間顯示\n   指令支援大小寫\n   增加隱藏指令")
+                    sendMessage(msg.to,"戦神実験版\n\n[版本version]\n実験版ver.5.1.1\n\n[版本詳情]\n実験版\n 5.1.0\n   刪除偵測退群回覆\n   刪除偵測被踢回覆\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "ginfo":
                     group = client.getGroup(msg.to)
                     md = "戦神実験版-群組詳情\n\n" + "[群組名稱]\n" + group.name + "\n\n[gid]\n" + group.id + "\n\n[群組照片]\nhttp://dl.profile.line-cdn.net/" + group.pictureStatus
@@ -142,8 +140,8 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to,"戦神実験版-help\n\n[help] 查看指令\n[ver] 查看版本\n[mid] 查看自己mid\n" + "[gid] 查看群組gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
 				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "Help":
-                    sendMessage(msg.to,"戦神実験版-help\n\n[help] 查看指令\n[ver] 查看版本\n[mid] 查看自己mid\n" + "[gid] 查看群組gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
-				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(msg.to,"戦神実験版-help\n\n[help] 查看指令\n[ver] 查看版本\n[mid] 查看自己的mid\n" + "[gid] 查看群組的gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
+				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid的友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if "gname:" in msg.text:
                     key = msg.text[22:]
                     group = client.getGroup(msg.to)
@@ -156,43 +154,56 @@ def SEND_MESSAGE(op):
 		if msg.text == "Url":
                     sendMessage(msg.to,"此群網址URL")
                     sendMessage(msg.to,"line://ti/g/" + client._client.reissueGroupTicket(msg.to) + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                if msg.text == "urlon":
+                if msg.text == "bot":
                     group = client.getGroup(msg.to)
-                    if group.preventJoinByTicket == False:
-                        sendMessage(msg.to, "URL 已開啟")
+		    if group.preventJoinByTicket == False:
+			sendMessage(msg.to, "")
                     else:
                         group.preventJoinByTicket = False
                         client.updateGroup(group)
-                        sendMessage(msg.to, "URL 已開啟")
+                    if group.preventJoinByTicket == True:
+                        sendMessage(msg.to, "戦神保護bot追加完畢!!")
+                    else:
+                        group.preventJoinByTicket = True
+                        client.updateGroup(group)
+                        sendMessage(msg.to, "戦神保護bot追加完畢!!")
+		if msg.text == "urlon":
+                    group = client.getGroup(msg.to)
+                    if group.preventJoinByTicket == False:
+                        sendMessage(msg.to, "URL為開啟狀態")
+                    else:
+                        group.preventJoinByTicket = False
+                        client.updateGroup(group)
+                        sendMessage(msg.to, "已開啟URL\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "Urlon":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == False:
-                        sendMessage(msg.to, "URL 已開啟")
+                        sendMessage(msg.to, "URL為開啟狀態")
                     else:
                         group.preventJoinByTicket = False
                         client.updateGroup(group)
-                        sendMessage(msg.to, "URL 已開啟")
+                        sendMessage(msg.to, "已開啟URL\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "urloff":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == True:
-                        sendMessage(msg.to, "URL 已關閉")
+                        sendMessage(msg.to, "URL為關閉狀態")
                     else:
                         group.preventJoinByTicket = True
                         client.updateGroup(group)
-                        sendMessage(msg.to, "URL 已關閉")
+                        sendMessage(msg.to, "已關閉URL\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "Urloff":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == True:
-                        sendMessage(msg.to, "URL 已關閉")
+                        sendMessage(msg.to, "URL為關閉狀態")
                     else:
                         group.preventJoinByTicket = True
                         client.updateGroup(group)
-                        sendMessage(msg.to, "URL 已關閉")
+                        sendMessage(msg.to, "已關閉URL\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if "kick:" in msg.text:
                     key = msg.text[5:]
                     client.kickoutFromGroup(msg.to, [key])
                     contact = client.getContact(key)
-                    sendMessage(msg.to, ""+contact.displayName+"掰掰囉(づ￣ ³￣)づ\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(msg.to, ""+contact.displayName+" 掰掰\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if "Nk:" in msg.text:
                     key = msg.text[3:]
                     group = client.getGroup(msg.to)
@@ -201,10 +212,10 @@ def SEND_MESSAGE(op):
                     if key in Names:
                         kazu = Names.index(key)
 			contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to,contact.displayName + "掰掰拉^^\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                        sendMessage(msg.to,contact.displayName + " 掰掰^^\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                         client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
                         contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to, ""+contact.displayName+" 抱歉囉><")
+                        sendMessage(msg.to, ""+contact.displayName+" 被我踢了><")
                     else:
                         sendMessage(msg.to, "戦神找不到這位成員><\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if "nk:" in msg.text:
@@ -215,10 +226,10 @@ def SEND_MESSAGE(op):
                     if key in Names:
                         kazu = Names.index(key)
 			contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to,contact.displayName + "掰掰拉^^\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                        sendMessage(msg.to,contact.displayName + " 掰掰^^\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                         client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
                         contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to, ""+contact.displayName+" 抱歉囉><")
+                        sendMessage(msg.to, ""+contact.displayName+" 被我踢了><")
                 if msg.text == "cancel":
                     group = client.getGroup(msg.to)
                     if group.invitee is None:
@@ -263,7 +274,8 @@ def SEND_MESSAGE(op):
                     M.contentType = 13
                     M.contentMetadata = {'mid': msg.from_}
                     client.sendMessage(M)
-		    
+		    contact = client.getContact(Mids[kazu])
+                    sendMessage(msg.to, "[名字]\n" + contact.displayName + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if "show:" in msg.text:
                     key = msg.text[-33:]
                     sendMessage(msg.to, text=None, contentMetadata={'mid': key}, contentType=13)
