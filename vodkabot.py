@@ -166,19 +166,7 @@ def SEND_MESSAGE(op):
 		if msg.text == "Url":
                     sendMessage(msg.to,"此群網址URL")
                     sendMessage(msg.to,"line://ti/g/" + client._client.reissueGroupTicket(msg.to) + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                if msg.text == "bot":
-                    group = client.getGroup(msg.to)
-		    if group.preventJoinByTicket == False:
-			sendMessage(msg.to, "")
-                    else:
-                        group.preventJoinByTicket = False
-                        client.updateGroup(group)
-                    if group.preventJoinByTicket == True:
-                        sendMessage(msg.to, "戦神保護bot追加完畢!!")
-                    else:
-                        group.preventJoinByTicket = True
-                        client.updateGroup(group)
-                        sendMessage(msg.to, "戦神保護bot追加完畢!!")
+
 		if msg.text == "urlon":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == False:
@@ -230,18 +218,44 @@ def SEND_MESSAGE(op):
                         sendMessage(msg.to, ""+contact.displayName+" 被我踢了><")
                     else:
                         sendMessage(msg.to, "戦神找不到這位成員><\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-		if "nk:" in msg.text:
-                    key = msg.text[3:]
-                    group = client.getGroup(msg.to)
-                    Names = [contact.displayName for contact in group.members]
-                    Mids = [contact.mid for contact in group.members]
-                    if key in Names:
-                        kazu = Names.index(key)
-			contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to,contact.displayName + " 掰掰^^\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                        client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
-                        contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to, ""+contact.displayName+" 被我踢了><")
+
+                elif "Mk:@" in msg.text:
+                       nk0 = msg.text.replace("Mk:@","")
+                       nk1 = nk0.lstrip()
+                       nk2 = nk1.replace("@","")
+                       nk3 = nk2.rstrip()
+                       _name = nk3
+                       gs = client.getGroup(msg.to)
+                       targets = []
+                       for s in gs.members:
+                           if _name in s.displayName:
+                              targets.append(s.mid)
+                       if targets == []:
+                           sendMessage(msg.to,"找不到用戶")
+                           pass
+                       else:
+                           for target in targets:
+                                try:
+                                    client.kickoutFromGroup(msg.to,[target])
+                                    print (msg.to,[g.mid])
+                                except:
+                elif "Nk:" in msg.text:
+                       _name = msg.text.replace("Nk:","")
+                       gs = client.getGroup(msg.to)
+                       targets = []
+                           if _name in g.displayName:
+                              targets.append(g.mid)
+                       if targets == []:
+                           sendMessage(msg.to,"找不到用戶")
+                       else:
+                           for target in targets:
+                              try:
+                                 client.kickoutFromGroup(msg.to,[target])
+                                 print (msg.to,[g.mid])
+                              except:
+                                 sendMessage(msg.to,"錯誤!!!!!!!!")
+			
+
                 if msg.text == "cancel":
                     group = client.getGroup(msg.to)
                     if group.invitee is None:
