@@ -219,43 +219,6 @@ def SEND_MESSAGE(op):
                     else:
                         sendMessage(msg.to, "戦神找不到這位成員><\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 
-                elif "Mk:@" in msg.text:
-                       nk0 = msg.text.replace("Mk:@","")
-                       nk1 = nk0.lstrip()
-                       nk2 = nk1.replace("@","")
-                       nk3 = nk2.rstrip()
-                       _name = nk3
-                       gs = client.getGroup(msg.to)
-                       targets = []
-                       for s in gs.members:
-                           if _name in s.displayName:
-                              targets.append(s.mid)
-                       if targets == []:
-                           sendMessage(msg.to,"找不到用戶")
-                           pass
-                       else:
-                           for target in targets:
-                                try:
-                                    client.kickoutFromGroup(msg.to,[target])
-                                    print (msg.to,[g.mid])
-                                except:
-                elif "Nk:" in msg.text:
-                    print "ok"
-                    _name = msg.text.replace("Nk:","")
-                    gs = client.getGroup(msg.to)
-                    targets = []
-                    for g in gs.members:
-                        if _name in g.displayName:
-                            targets.append(g.mid)
-                    if targets == []:
-                        sendMessage(msg.to,"找不到用戶")
-                    else:
-                        for target in targets:
-                            try:
-                                client.kickoutFromGroup(msg.to,[target])
-                                print (msg.to,[g.mid])
-                            except:
-                                sendMessage(msg.to,"錯誤!!!!!!!!")
 			
 
                 if msg.text == "cancel":
@@ -365,8 +328,27 @@ def SEND_MESSAGE(op):
                         sendMessage(msg.to, "戦神実験版-已讀詳情\n" + "已讀的人 %s\n\n已讀不回的人\n%s >< ♪\n\n抓已讀點的時間:\n[%s]"  % (wait['readMember'][msg.to],chiya,setTime[msg.to]))
                     else:
                         sendMessage(msg.to, "還沒抓已讀點喔♪")
-                else:
-                    pass
+			
+		elif "Mk:@" in msg.text:
+                       nk0 = msg.text.replace("Mk:@","")
+                       nk1 = nk0.lstrip()
+                       nk2 = nk1.replace("@","")
+                       nk3 = nk2.rstrip()
+                       _name = nk3
+                       gs = client.getGroup(msg.to)
+                       targets = []
+                       for s in gs.members:
+                           if _name in s.displayName:
+                              targets.append(s.mid)
+                       if targets == []:
+                           sendMessage(msg.to,"找不到用戶")
+                           pass
+                       else:
+                           for target in targets:
+                                try:
+                                    client.kickoutFromGroup(msg.to,[target])
+                                    print (msg.to,[g.mid])
+                                except:
         else:
             pass
 
