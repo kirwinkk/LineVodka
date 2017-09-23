@@ -39,7 +39,7 @@ def sendMessage(to, text, contentMetadata={}, contentType=0):
 
 def NOTIFIED_ADD_CONTACT(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param1).displayName + "謝謝加入~~ Thanks for add\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+        sendMessage(op.param1, client.getContact(op.param1).displayName + "\n謝謝加入我為好友~~\nThanks for add\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_ADD_CONTACT\n\n")
@@ -135,7 +135,7 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to,"Error")
 		if msg.text == "Kicker":
                     sendMessage(msg.to,"Error")
-		elif msg.text in ["Sp","Speed","speed"]:
+		elif msg.text in ["Sp","Speed","sp","speed"]:
                     start = time.time()
                     sendMessage(msg.to, "BG戦神Bot讀取中...")
                     elapsed_time = time.time() - start
@@ -145,7 +145,16 @@ def SEND_MESSAGE(op):
                     key1 = key["MENTIONEES"][0]["M"]
                     mi = client.getContact(key1)
                     sendMessage(msg.to,"" +  key1)
+		elif ("mid:" in msg.text):
+                    key = eval(msg.contentMetadata["MENTION"])
+                    key1 = key["MENTIONEES"][0]["M"]
+                    mi = client.getContact(key1)
+                    sendMessage(msg.to,"" +  key1)
 		elif ("Gn:" in msg.text):
+                    group = client.getGroup(msg.to)
+                    group.name = msg.text.replace("Gn:","")
+                    client.updateGroup(group)
+		elif ("gn:" in msg.text):
                     group = client.getGroup(msg.to)
                     group.name = msg.text.replace("Gn:","")
                     client.updateGroup(group)
@@ -226,6 +235,11 @@ def SEND_MESSAGE(op):
                     contact = client.getContact(key)
                     sendMessage(msg.to, ""+contact.displayName+" 掰掰\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 
+		if "Kick:" in msg.text:
+                    key = msg.text[5:]
+                    client.kickoutFromGroup(msg.to, [key])
+                    contact = client.getContact(key)
+                    sendMessage(msg.to, ""+contact.displayName+" 掰掰\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 elif "Nk:" in msg.text:
                     print "ok"
                     _name = msg.text.replace("Nk:","")
@@ -282,7 +296,13 @@ def SEND_MESSAGE(op):
                     client.inviteIntoGroup(msg.to, [key])
                     contact = client.getContact(key)
                     sendMessage(msg.to, ""+contact.displayName+" 已被招待\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                if msg.text == "me":
+		if "Invite:" in msg.text:
+                    key = msg.text[-33:]
+                    client.findAndAddContactsByMid(key)
+                    client.inviteIntoGroup(msg.to, [key])
+                    contact = client.getContact(key)
+                    sendMessage(msg.to, ""+contact.displayName+" 已被招待\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                elif msg.text in ["Me","me","我的友資"]:
                     M = Message()
                     M.to = msg.to
                     M.contentType = 13
@@ -294,8 +314,13 @@ def SEND_MESSAGE(op):
                     key = msg.text[-33:]
                     sendMessage(msg.to, text=None, contentMetadata={'mid': key}, contentType=13)
                     contact = client.getContact(key)
-                    sendMessage(msg.to, ""+contact.displayName+"'s contact")
-                if msg.text == "time":
+                    sendMessage(msg.to, "這是 "+contact.displayName+" 的友資" + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+		if "Show:" in msg.text:
+                    key = msg.text[-33:]
+                    sendMessage(msg.to, text=None, contentMetadata={'mid': key}, contentType=13)
+                    contact = client.getContact(key)
+                    sendMessage(msg.to, "這是 "+contact.displayName+" 的友資" + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                elif msg.text in ["Time","time","時刻"]:
                     sendMessage(msg.to, "戦神実験版[" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
                 if msg.text == "gift":
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
