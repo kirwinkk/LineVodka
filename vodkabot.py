@@ -110,12 +110,16 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to, msg.from_)
 		if msg.text == "作者":
                     sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(op.param1, text=None, contentMetadata={'mid': "uc216d8664c4e1f43772c98b1b0b8956e"}, contentType=13)
 		if msg.text == "Author":
                     sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(op.param1, text=None, contentMetadata={'mid': "uc216d8664c4e1f43772c98b1b0b8956e"}, contentType=13)
 		if msg.text == "作成者":
                     sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(op.param1, text=None, contentMetadata={'mid': "uc216d8664c4e1f43772c98b1b0b8956e"}, contentType=13)
 		if msg.text == "author":
                     sendMessage(msg.to,"[半垢作者]:\n 戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(op.param1, text=None, contentMetadata={'mid': "uc216d8664c4e1f43772c98b1b0b8956e"}, contentType=13)
 		if msg.text == "Ps":
                     sendMessage(msg.to,"戦神実験版-注意事項\n\n1. 禁止在副本or私訊發出指令\n2.打完指令若沒反應,請耐心等待,禁止不斷輸入指令\n3.10人以下群組會造成機器不穩定\n4.當伺服器不穩,機器也會不穩,請見諒\n\n仍有疑問請詢問作者\n戦神:http://line.me/ti/p/4-ZKcjagH0\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if msg.text == "ps":
@@ -150,10 +154,10 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to,md)
 		if msg.text == "help":
                     sendMessage(msg.to,"戦神実験版Ver5.2.3-[help]\n\n[help] 查看指令\n[ver] 查看版本\n[ps] 重要注意事項!\n[author] 此半垢作者連結\n[mid] 查看自己mid\n" + "[gid] 查看群組gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
-				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+				"[Nk:] 利用名字其中一個字踢人\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
                 if msg.text == "Help":
                     sendMessage(msg.to,"戦神実験版Ver5.2.3-[help]\n\n[help] 查看指令\n[ver] 查看版本\n[ps] 重要注意事項!\n[author] 此半垢作者連結\n[mid] 查看自己的mid\n" + "[gid] 查看群組的gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
-				"[Nk:] 利用名字踢人(完整用戶名稱)\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid的友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+				"[Nk:] 利用名字其中一個字踢人\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid的友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if "gname:" in msg.text:
                     key = msg.text[22:]
                     group = client.getGroup(msg.to)
@@ -204,22 +208,24 @@ def SEND_MESSAGE(op):
                     client.kickoutFromGroup(msg.to, [key])
                     contact = client.getContact(key)
                     sendMessage(msg.to, ""+contact.displayName+" 掰掰\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                if "Nk:" in msg.text:
-                    key = msg.text[3:]
-                    group = client.getGroup(msg.to)
-                    Names = [contact.displayName for contact in group.members]
-                    Mids = [contact.mid for contact in group.members]
-                    if key in Names:
-                        kazu = Names.index(key)
-			contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to,contact.displayName + " 掰掰^^\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                        client.kickoutFromGroup(msg.to, [""+Mids[kazu]+""])
-                        contact = client.getContact(Mids[kazu])
-                        sendMessage(msg.to, ""+contact.displayName+" 被我踢了><")
-                    else:
-                        sendMessage(msg.to, "戦神找不到這位成員><\n" + "[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 
-			
+                elif "Nk:" in msg.text:
+                    print "ok"
+                    _name = msg.text.replace("Nk:","")
+                    gs = client.getGroup(msg.to)
+                    targets = []
+                    for g in gs.members:
+                        if _name in g.displayName:
+                            targets.append(g.mid)
+                    if targets == []:
+                        sendMessage(msg.to,"戦神找不到用戶><")
+                    else:
+                        for target in targets:
+                            try:
+                                client.kickoutFromGroup(msg.to,[target])
+                                print (msg.to,[g.mid])
+                            except:
+                                sendMessage(msg.to,"戦神發現...踢人規制仍然存在><")
 
                 if msg.text == "cancel":
                     group = client.getGroup(msg.to)
@@ -341,7 +347,7 @@ def SEND_MESSAGE(op):
                            if _name in s.displayName:
                               targets.append(s.mid)
                        if targets == []:
-                           sendMessage(msg.to,"找不到用戶")
+                           sendMessage(msg.to,"戦神找不到用戶><")
                            pass
                        else:
                            for target in targets:
@@ -349,3 +355,4 @@ def SEND_MESSAGE(op):
                                     client.kickoutFromGroup(msg.to,[target])
                                     print (msg.to,[g.mid])
                                 except:
+                                    sendMessage(msg.to,"戦神發現...踢人規制仍然存在><")
