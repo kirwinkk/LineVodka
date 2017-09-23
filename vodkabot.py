@@ -179,11 +179,11 @@ def SEND_MESSAGE(op):
                     else: md += "\n成員人數: " + str(len(group.members)) + "人\n招待中: " + str(len(group.invitee)) + "人\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]"
                     sendMessage(msg.to,md)
 		if msg.text == "help":
-                    sendMessage(msg.to,"戦神実験版Ver5.2.3-[help]\n\n[help] 查看指令\n[ver] 查看版本\n[ps] 重要注意事項!\n[author] 此半垢作者連結\n[mid] 查看自己mid\n" + "[gid] 查看群組gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
-				"[Nk:] 利用名字其中一個字踢人\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
-                if msg.text == "Help":
-                    sendMessage(msg.to,"戦神実験版Ver5.2.3-[help]\n\n[help] 查看指令\n[ver] 查看版本\n[ps] 重要注意事項!\n[author] 此半垢作者連結\n[mid] 查看自己的mid\n" + "[gid] 查看群組的gid\n" + "[me︎] 送出自己的友資\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
-				"[Nk:] 利用名字其中一個字踢人\n" + "[cancel] 取消全部邀請\n[bot] 追加保護\n[kicker] 查看追加保護狀態\n[show:] 顯示mid的友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    sendMessage(msg.to,"戦神実験版Ver5.2.3-[help]\n\n[help] 查看指令\n[ver] 查看版本\n[ps] 重要注意事項!\n[author] 此半垢作者連結\n[mid] 查看自己的mid\n" + "[gid] 查看群組的gid\n" + "[me︎] 送出自己的友資\n[mid:] 查看之人的mid\n[Gn:] 更改群組名稱\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
+				"[Nk:] 利用名字其中一個字踢人\n" + "[Mk:] 標註踢人\n[cancel] 取消全部邀請\n[Sp] 查看機器速度\n[kicker] 查看追加保護狀態\n[show:] 顯示mid的友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+		if msg.text == "Help":
+                    sendMessage(msg.to,"戦神実験版Ver5.2.3-[help]\n\n[help] 查看指令\n[ver] 查看版本\n[ps] 重要注意事項!\n[author] 此半垢作者連結\n[mid] 查看自己的mid\n" + "[gid] 查看群組的gid\n" + "[me︎] 送出自己的友資\n[mid:] 查看之人的mid\n[Gn:] 更改群組名稱\n[ginfo] 查看群組詳細資料\n" + "[url] 取得群組網址\n[urlon] 開啟群組網址\n[urloff] 關閉群組網址\n[invite:] 利用mid邀請\n[kick:] 利用mid踢人\n" + 
+				"[Nk:] 利用名字其中一個字踢人\n" + "[Mk:] 標註踢人\n[cancel] 取消全部邀請\n[Sp] 查看機器速度\n[kicker] 查看追加保護狀態\n[show:] 顯示mid的友資\n[set] 設定已讀點\n[read] 顯示已讀用戶\n[time] 顯示現在時間\n[gift] 發送禮物\n\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
 		if "gname:" in msg.text:
                     key = msg.text[22:]
                     group = client.getGroup(msg.to)
@@ -377,10 +377,27 @@ def SEND_MESSAGE(op):
                     else:
                         sendMessage(msg.to, "還沒抓已讀點喔♪")
 			
-		elif ("Mk:@" in msg.text):
-                    key = eval(msg.contentMetadata["MENTION"])
-                    key1 = key["MENTIONEES"][0]["M"]
-                    client.kickoutFromGroup(msg.to, [key])
+		elif "Mk:@" in msg.text:
+                       nk0 = msg.text.replace("Mk:@","")
+                       nk1 = nk0.lstrip()
+                       nk2 = nk1.replace("@","")
+                       nk3 = nk2.rstrip()
+                       _name = nk3
+                       gs = client.getGroup(msg.to)
+                       targets = []
+                       for s in gs.members:
+                           if _name in s.displayName:
+                              targets.append(s.mid)
+                       if targets == []:
+                           sendMessage(msg.to,"戦神找不到用戶><")
+                           pass
+                       else:
+                           for target in targets:
+                                try:
+                                    client.kickoutFromGroup(msg.to,[target])
+                                    print (msg.to,[g.mid])
+                                except:
+					pass
 
 		else:
                     pass
