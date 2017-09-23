@@ -105,6 +105,25 @@ def SEND_MESSAGE(op):
 	elif msg.contentType == 16:
                 msg.text = "文章網址 URL\n" + msg.contentMetadata["postEndUrl"] + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]"
                 sendMessage(msg.to,msg.text)
+		
+	elif msg.contentType == 25:
+                    msg.contentType = 0
+                    cl.sendText(msg.to,msg.contentMetadata["mid"])
+                    if 'displayName' in msg.contentMetadata:
+                        contact = cl.getContact(msg.contentMetadata["mid"])
+                        try:
+                            cu = cl.channel.getCover(msg.contentMetadata["mid"])
+                        except:
+                            cu = ""
+                        cl.sendText(msg.to,"ℬᎶ戦神Bot-友資詳情\n[名字]:\n" + msg.contentMetadata["displayName"] + "\n[mid]:\n" + msg.contentMetadata["mid"] + "\n[頭貼網址]:\nhttp://dl.profile.line-cdn.net/" + contact.pictureStatus + "\n[封面網址]:\n" + str(cu) + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+                    else:
+                        contact = cl.getContact(msg.contentMetadata["mid"])
+                        try:
+                            cu = cl.channel.getCover(msg.contentMetadata["mid"])
+                        except:
+                            cu = ""
+                        cl.sendText(msg.to,"ℬᎶ戦神Bot-友資詳情\n[名字]:\n" + msg.contentMetadata["displayName"] + "\n[mid]:\n" + msg.contentMetadata["mid"] + "\n[頭貼網址]:\nhttp://dl.profile.line-cdn.net/" + contact.pictureStatus + "\n[封面網址]:\n" + str(cu) + "\n\n[戦神実験版" + datetime.datetime.today().strftime('%H:%M:%S') + "]")
+
         if msg.toType == 2:
             if msg.contentType == 0:
                 if msg.text == "mid":
