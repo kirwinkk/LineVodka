@@ -377,27 +377,11 @@ def SEND_MESSAGE(op):
                     else:
                         sendMessage(msg.to, "還沒抓已讀點喔♪")
 			
-		elif "Mk:@" in msg.text:
-                       nk0 = msg.text.replace("Mk:@","")
-                       nk1 = nk0.lstrip()
-                       nk2 = nk1.replace("@","")
-                       nk3 = nk2.rstrip()
-                       _name = nk3
-                       gs = client.getGroup(msg.to)
-                       targets = []
-                       for s in gs.members:
-                           if _name in s.displayName:
-                              targets.append(s.mid)
-                       if targets == []:
-                           sendMessage(msg.to,"戦神找不到用戶><")
-                           pass
-                       else:
-                           for target in targets:
-                                try:
-                                    client.kickoutFromGroup(msg.to,[target])
-                                    print (msg.to,[g.mid])
-                                except:
-					pass
+		elif ("Mk:@" in msg.text):
+                    key = eval(msg.contentMetadata["MENTION"])
+                    key1 = key["MENTIONEES"][0]["M"]
+                    client.kickoutFromGroup(msg.to, [key])
+
 		else:
                     pass
         else:
