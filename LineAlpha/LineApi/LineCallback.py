@@ -8,7 +8,7 @@ class LineCallback(object):
         self.callback("Enter PinCode '" + pin + "' to your mobile phone in 2 minutes")
 
     def QrUrl(self, url):
-        self.callback("Login qrcode to your smartphone in 2 minutes\n" + url)
+        self.callback("請在2分鐘內登陸戦神所發行的網址\n" + url)
 
     def default(self, str):
         self.callback(str)
