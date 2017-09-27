@@ -47,45 +47,6 @@ def NOTIFIED_ADD_CONTACT(op):
 
 tracer.addOpInterrupt(5,NOTIFIED_ADD_CONTACT)
 
-def NOTIFIED_READ_MESSAGE(op):
-    #print op
-    try:
-        if op.param1 in wait['readPoint']:
-            Name = client.getContact(op.param2).displayName
-            if Name in wait['readMember'][op.param1]:
-                pass
-            else:
-                wait['readMember'][op.param1] += "\n・" + Name
-                wait['ROM'][op.param1][op.param2] = "・" + Name
-        else:
-            pass
-    except:
-        pass
-
-tracer.addOpInterrupt(55, NOTIFIED_READ_MESSAGE)
-
-def RECEIVE_MESSAGE(op):
-    msg = op.message
-    try:
-        if msg.contentType == 0:
-            try:
-                if msg.to in wait['readPoint']:
-                    if msg.from_ in wait["ROM"][msg.to]:
-                        del wait["ROM"][msg.to][msg.from_]
-                else:
-                    pass
-            except:
-                pass
-        else:
-            pass
-    except KeyboardInterrupt:
-	       sys.exit(0)
-    except Exception as error:
-        print error
-        print ("\n\nRECEIVE_MESSAGE\n\n")
-        return
-
-tracer.addOpInterrupt(26, RECEIVE_MESSAGE)
 
 def SEND_MESSAGE(op):
     msg = op.message
@@ -345,56 +306,6 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
 		if msg.text == "Gift":
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
-                if msg.text == "set":
-                    sendMessage(msg.to, "已抓已讀點♪\n\n" + "[戦神" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
-                    try:
-                        del wait['readPoint'][msg.to]
-                        del wait['readMember'][msg.to]
-                    except:
-                        pass
-                    wait['readPoint'][msg.to] = msg.id
-                    wait['readMember'][msg.to] = ""
-                    wait['setTime'][msg.to] = datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-                    wait['ROM'][msg.to] = {}
-                    print wait
-		if msg.text == "Set":
-                    sendMessage(msg.to, "已抓已讀點♪\n\n" + "[戦神" + datetime.datetime.today().strftime('%Y年%m月%d日 %H:%M:%S') + "]")
-                    try:
-                        del wait['readPoint'][msg.to]
-                        del wait['readMember'][msg.to]
-                    except:
-                        pass
-                    wait['readPoint'][msg.to] = msg.id
-                    wait['readMember'][msg.to] = ""
-                    wait['setTime'][msg.to] = datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-                    wait['ROM'][msg.to] = {}
-                    print wait
-                if msg.text == "read":
-                    if msg.to in wait['readPoint']:
-                        if wait["ROM"][msg.to].items() == []:
-                            chiya = ""
-                        else:
-                            chiya = ""
-                            for rom in wait["ROM"][msg.to].items():
-                                print rom
-                                chiya += rom[1] + "\n"
-
-                        sendMessage(msg.to, "戦神実験版-已讀詳情\n" + "已讀的人 %s\n\n已讀不回的人\n%s >< ♪\n\n抓已讀點的時間:\n[%s]"  % (wait['readMember'][msg.to],chiya,setTime[msg.to]))
-                    else:
-                        sendMessage(msg.to, "還沒抓已讀點喔♪")
-		if msg.text == "Read":
-                    if msg.to in wait['readPoint']:
-                        if wait["ROM"][msg.to].items() == []:
-                            chiya = ""
-                        else:
-                            chiya = ""
-                            for rom in wait["ROM"][msg.to].items():
-                                print rom
-                                chiya += rom[1] + "\n"
-
-                        sendMessage(msg.to, "戦神実験版-已讀詳情\n" + "已讀的人 %s\n\n已讀不回的人\n%s >< ♪\n\n抓已讀點的時間:\n[%s]"  % (wait['readMember'][msg.to],chiya,setTime[msg.to]))
-                    else:
-                        sendMessage(msg.to, "還沒抓已讀點喔♪")
 			
 		elif "Mk:@" in msg.text:
                        nk0 = msg.text.replace("Mk:@","")
