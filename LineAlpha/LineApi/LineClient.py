@@ -28,12 +28,12 @@ class LineClient(LineApi):
     @loggedIn
     def _loginresult(self):
         if self.isLogin == True:
-            print "VodkaBot\n"
+            print "戦神Bot\n"
             print "authToken : " + self.authToken + "\n"
             print "certificate : " + self.certificate + "\n"
             """:type profile: Profile"""
             profile = self._client.getProfile()
-            print "name : " + profile.displayName
+            print "登錄者名字 : " + profile.displayName
         else:
             print "must login!\n"
 
